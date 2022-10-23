@@ -6,6 +6,10 @@ from google.cloud import storage
 import pandas as pd
 
 
+@app.get('/')
+def index():
+  return "Running..."
+
 @app.post('/')
 def predecir():
     dataset = request.get_json()
