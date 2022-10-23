@@ -18,6 +18,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import UsersService from '@/services/users_service'
 
 export default {
   name: 'WelcomePage',
@@ -41,6 +42,11 @@ export default {
       reader.onload = () => {
         const csvOutput = reader.result
         const csvRows = csvOutput.split('\r\n')
+
+        console.log(csvRows)
+        if (csvRows[csvRows.length - 1] === '') {
+          csvRows.pop()
+        }
         let header = csvRows.shift()
         const separator = this.getSeparator(header)
 
@@ -56,7 +62,9 @@ export default {
           return obj
         })
 
-        this.setUsersList(listToUpload)
+        UsersService.getUsers({ users: listToUpload }).then((response) => {
+          this.setUsersList(response.output)
+        })
         this.$router.push({ name: 'retargeting' })
       }
     },
