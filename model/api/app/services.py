@@ -42,4 +42,7 @@ def predecir():
     df_preds = pd.concat([df_preds, pd.DataFrame(y, columns=["PREDICTIONS"]), pd.DataFrame(y_probs[:,:-1], columns=["PROBABILITY"])], axis = 1)
     json_preds = df_preds.to_dict('records')
 
-    return jsonify(output = json_preds)
+    response = jsonify(output = json_preds)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
