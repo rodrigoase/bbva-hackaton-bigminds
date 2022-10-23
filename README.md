@@ -11,6 +11,7 @@ Desarrollo y construcción de una plataforma web y un modelo de machine learning
 
 ## [🔗] Enlaces
 
+* Dataset para probar la solución: https://github.com/rodrigoase/bbva-hackaton-bigminds/blob/main/model/experimentation/datasets/X_testing_webpage.csv
 * Solución en ejecución: https://bigminds-platform-lgec99spr-renatocoronado99.vercel.app/
 * Endpoint de API del modelo entrenado: https://bbva-hackaton-bigminds.de.r.appspot.com/
 * Ejemplo de request al API del modelo entrenado: https://www.postman.com/bigminds/workspace/hackaton-bbva/request/24022294-087a15fb-0db6-436e-aecd-b52b1cda60e9
