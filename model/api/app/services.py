@@ -3,7 +3,7 @@ from app import utils
 from flask import request, jsonify
 import _pickle as cPickle
 from google.cloud import storage
-from xgboost import XGBClassifier
+import pandas as pd
 
 
 @app.post('/')
@@ -30,6 +30,12 @@ def predecir():
     with model_blob.open("rb") as model_file:
         model = cPickle.load(model_file)
 
+    df_preds = dataset[["FULLNAME", "PHONE_NUMBER"]].copy()
+    
     y = model.predict(dataset_preprocesado)
+    y_probs = model.predict_proba(dataset_preprocesado)
 
-    return jsonify(output = len(y))
+    df_preds = pd.concat([df_preds, pd.DataFrame(y, columns=["PREDICTIONS"]), pd.DataFrame(y_probs[:,:-1], columns=["PROBABILITY"])], axis = 1)
+    json_preds = df_preds.to_dict('records')
+
+    return jsonify(output = json_preds)
